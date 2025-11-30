@@ -15,7 +15,7 @@ def format_ware(ware, ware_type):
         "richtung": ware.richtung_kürzung if hasattr(ware, 'richtung_kürzung') else ware.richtung.kürzung,
         "höhe": ware.höhe.nummer if hasattr(ware, 'höhe') else ware.höhe_nummer,
         "breite": ware.breite.nummer if hasattr(ware, 'breite') else ware.breite_nummer,
-        "wandstärke": getattr(ware, "wandstärke", None),
+        "wandstärke": ware.wandstärke.nummer if ware.wandstärke else None,
         "nummer": ware.id,
         "oberfläche": ware.oberfläche_name,
         "gewicht": ware.gewicht,
