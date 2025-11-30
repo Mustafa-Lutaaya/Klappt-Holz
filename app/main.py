@@ -22,7 +22,7 @@ app.include_router(setup_router, prefix="/api", tags=["Setup"]) # Adds the Setup
 
 # Domains allowed to make requests to the backend
 origins = [
-    "*"
+    "http://127.0.0.1:5500/"
 ]
 
 # Enables CORS middleware
