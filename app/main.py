@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Depends  # Imports FastAPI class to create the main app instance
+from fastapi.middleware.cors import CORSMiddleware # Imports CORS to enable communication beteween frontend and backend
 from pathlib import Path # Provides object-oriented file system paths
 from routes.setup_routes import router as setup_router # Imports Setup router instance from the setup_routes module and renames it as setup_router
 from database.database import engine, Base, get_db
@@ -18,6 +19,20 @@ app = FastAPI(title="Picker", version="1.0.0") # Creates a FastAPI app instance
 
 # Registers routers for different features
 app.include_router(setup_router, prefix="/api", tags=["Setup"]) # Adds the Setup router to the main app, prefixing all its routes with "/api" meaning every path inside the api_router will be available under "/api". The tags parameter groups the routes under a Backend tag in Swagger UI
+
+# Domains allowed to make requests to the backend
+origins = [
+    "*"
+]
+
+# Enables CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins, # Domains allowed
+    allow_credentials=True, # Allows cookie + auth
+    allow_methods=["*"], # Allows all HTTP methods
+    allow_headers=["*"], # Allows all headers
+)
 
 Max_Kunden = 5 
 Max_Pallet = 1000 
